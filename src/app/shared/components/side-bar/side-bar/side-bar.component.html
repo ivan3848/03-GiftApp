@@ -1,0 +1,10 @@
+<div class="bg-sidebar text-light text-center p-3" id="side-bar">
+  <h2>Gift App</h2>
+  <hr>
+
+  <button
+    *ngFor="let item of history"
+    class="btn btn-outline-light py-2 px-5 text-center form-control my-1">
+    {{ item | titlecase}}
+  </button>
+</div>
