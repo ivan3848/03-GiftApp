@@ -9,5 +9,9 @@ import { Data } from '../../interfaces/gift.interface';
 export class CardComponent {
 
   @Input()
-  public giftList: Data[] = [];
+  public gift: Data = 
+  {
+    url: '',
+    title: ''
+  };
 }

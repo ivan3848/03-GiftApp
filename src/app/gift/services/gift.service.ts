@@ -20,6 +20,10 @@ export class GiftService {
     return [...this._giftHistory];
   }
 
+  public get giftList(){
+    return [...this._giftList];
+  }
+
   public searchGift( gift: string): void{
     gift = gift.toLowerCase();
     if(!gift)
@@ -47,7 +51,6 @@ export class GiftService {
       .subscribe(resp => 
         {
           this._giftList = resp.data;
-          console.log(resp.data);
         });
   }
 
@@ -55,6 +58,4 @@ export class GiftService {
     this._giftHistory = this._giftHistory.filter(x => x != gift);
     this._giftHistory = this._giftHistory.slice(0, 10);
   }
-
-
 }

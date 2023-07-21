@@ -10,4 +10,7 @@ export class HomePageComponent {
 
   constructor( private giftService: GiftService){}
 
+  public get giftList(){
+    return this.giftService.giftList;
+  }
 }

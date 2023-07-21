@@ -15,4 +15,7 @@ export class SideBarComponent {
     return this.giftService.giftHistory;
   }
 
+  public searchGift(gift : string):void{
+    this.giftService.searchGift(gift);
+  }
 }
