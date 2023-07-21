@@ -8,10 +8,11 @@ import { GiftService } from 'src/app/gift/services/gift.service';
 })
 
 export class SideBarComponent {
+  
+  constructor( private giftService: GiftService){}
 
-    constructor( private giftService: GiftService){}
+  public get history(){
+    return this.giftService.giftHistory;
+  }
 
-    public get history(){
-      return this.giftService.giftHistory;
-    }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GiftService } from '../../services/gift.service';
 
 @Component({
   selector: 'gift-home-page',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
+
+  constructor( private giftService: GiftService){}
 
 }
