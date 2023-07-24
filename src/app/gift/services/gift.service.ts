@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Data, SearchGiftResponse } from '../interfaces/gift.interface';
+import { Card } from '../interfaces/card';
 
 const giftUrl: string = 'https://api.giphy.com/v1/gifs/search';
 const apiKey : string = 'K0i5V7JfRHzlF0rQ7VlfgUoulSMD5bN7';
@@ -13,7 +14,7 @@ export class GiftService {
 
   private _giftHistory: string[] = [];
   private _giftList: Data[] = [];
-
+  
   constructor(private http: HttpClient )
   {
     this.getHistoryInLocalStorage();
@@ -47,6 +48,17 @@ export class GiftService {
 
   }
 
+  public get cardData(): Card[]{
+    let cardDataList: Card[] = [];
+    this.giftList.some(gift => {
+        cardDataList.push({
+          title: gift.title,
+          url: gift.images.downsized_medium.url
+        });
+    });
+
+    return cardDataList;
+  }
   private searchGiftInApi( gift: string): void{
 
     const params: HttpParams = new HttpParams()
