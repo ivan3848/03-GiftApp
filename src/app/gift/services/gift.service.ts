@@ -14,7 +14,10 @@ export class GiftService {
   private _giftHistory: string[] = [];
   private _giftList: Data[] = [];
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient )
+  {
+    this.getHistoryInLocalStorage();
+  }
 
   public get giftHistory(){
     return [...this._giftHistory];
@@ -34,21 +37,25 @@ export class GiftService {
     this.addGiftToHistory(gift);
     this._giftHistory.unshift(gift);
     this.searchGiftInApi(gift);
+    this.saveHistoryInLocalStorage();
+
   }
 
   public removeGift( gift: string): void{
     this._giftHistory.filter(x => x != gift);
+    this.saveHistoryInLocalStorage();
+
   }
 
   private searchGiftInApi( gift: string): void{
-    
+
     const params: HttpParams = new HttpParams()
       .set('api_key', apiKey)
       .set('limit', '10')
-      .set('q', gift); 
-    
+      .set('q', gift);
+
     this.http.get<SearchGiftResponse>(giftUrl, { params })
-      .subscribe(resp => 
+      .subscribe(resp =>
         {
           this._giftList = resp.data;
         });
@@ -57,5 +64,17 @@ export class GiftService {
   private addGiftToHistory( gift: string):void{
     this._giftHistory = this._giftHistory.filter(x => x != gift);
     this._giftHistory = this._giftHistory.slice(0, 10);
+  }
+
+  private saveHistoryInLocalStorage(): void{
+    localStorage.setItem('history', JSON.stringify(this._giftHistory));
+  }
+
+  private getHistoryInLocalStorage(){
+    let data = JSON.parse( localStorage.getItem('history')! );
+    if(data){
+      this._giftHistory = data;
+      this.searchGift(data[0]);
+    }
   }
 }
