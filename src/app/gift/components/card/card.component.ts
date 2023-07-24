@@ -9,9 +9,12 @@ import { Card } from '../../interfaces/card';
 export class CardComponent {
 
   @Input()
-  public cardData: Card =
-  {
-    url: '',
-    title: ''
-  };
+  public cardData!: Card;
+
+  public hasLoad: boolean = false;
+
+  public onLoad():void{
+    setTimeout(function(){}, 500);
+    this.hasLoad = true;
+  }
 }
