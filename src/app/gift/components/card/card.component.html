@@ -1,16 +1,16 @@
 
-<div class="card" style="width: 18rem;">
+<div class="card animate__animated animate__bounceIn" style="width: 18rem;">
     <img
       (load)="onLoad()"
       [ngStyle]="{display: hasLoad ? '' : 'none'}"
       [src]="cardData.url"
       [alt]="cardData.title"
-      class="card-img-top">
+      class="card-img-top animate__animated animate__fadeIn">
 
     <img *ngIf="!hasLoad"
       src="./../../../../assets/images/loader.svg"
       [alt]="cardData.title"
-      class="card-img-top bg-dark">
+      class="card-img-top bg-primary animate__animated animate__fadeOut">
 
       <div class="card-body">
       <h5 class="card-title">{{ cardData.title }}</h5>
