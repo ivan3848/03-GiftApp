@@ -14,10 +14,16 @@ export class GiftService {
 
   private _giftHistory: string[] = [];
   private _giftList: Data[] = [];
-  
+
   constructor(private http: HttpClient )
   {
     this.getHistoryInLocalStorage();
+  }
+
+  private _cardList: Card[] = [];
+
+  public get cardList(): Card[]{
+    return [...this._cardList];
   }
 
   public get giftHistory(){
@@ -35,9 +41,11 @@ export class GiftService {
       alert("Insert a valid gift name");
       return;
     }
+    
     this.addGiftToHistory(gift);
     this._giftHistory.unshift(gift);
     this.searchGiftInApi(gift);
+    this.cardData();
     this.saveHistoryInLocalStorage();
 
   }
@@ -45,20 +53,20 @@ export class GiftService {
   public removeGift( gift: string): void{
     this._giftHistory.filter(x => x != gift);
     this.saveHistoryInLocalStorage();
-
+    this.cardData();
   }
 
-  public get cardData(): Card[]{
-    let cardDataList: Card[] = [];
+  public cardData(): void{
+    this._cardList = [];
+
     this.giftList.some(gift => {
-        cardDataList.push({
+        this._cardList.push({
           title: gift.title,
           url: gift.images.downsized_medium.url
         });
     });
-
-    return cardDataList;
   }
+
   private searchGiftInApi( gift: string): void{
 
     const params: HttpParams = new HttpParams()

@@ -14,7 +14,6 @@ export class CardComponent {
   public hasLoad: boolean = false;
 
   public onLoad():void{
-    setTimeout(function(){}, 500);
     this.hasLoad = true;
   }
 }

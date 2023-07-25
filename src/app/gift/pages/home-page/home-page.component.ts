@@ -16,8 +16,8 @@ export class HomePageComponent {
     return this.giftService.giftList;
   }
 
-  public get carData(): Card[]{
-    return this.giftService.cardData;
+  public get cardData(): Card[]{
+    return this.giftService.cardList;
   }
 
 }

@@ -1,18 +1,19 @@
 
 <div class="card" style="width: 18rem;">
-    <img *ngIf="hasLoad"
-        (load)="onLoad()"
-        [src]="cardData.url"
-        [alt]="cardData.title"
-        class="card-img-top">
+    <img
+      (load)="onLoad()"
+      [ngStyle]="{display: hasLoad ? '' : 'none'}"
+      [src]="cardData.url"
+      [alt]="cardData.title"
+      class="card-img-top">
 
     <img *ngIf="!hasLoad"
-        src="./../../../../assets/images/loader.svg"
-        [alt]="cardData.title"
-        class="card-img-top bg-dark">
+      src="./../../../../assets/images/loader.svg"
+      [alt]="cardData.title"
+      class="card-img-top bg-dark">
 
-        <div class="card-body">
-        <h5 class="card-title">{{ cardData.title }}</h5>
-        <p class="card-text"></p>
+      <div class="card-body">
+      <h5 class="card-title">{{ cardData.title }}</h5>
+      <p class="card-text"></p>
     </div>
 </div>
